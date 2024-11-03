@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find 5-Year High and LTP of NSE Stocks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        .home-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .home-button:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        .stock-info, .error-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 18px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .stock-info {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-left: 5px solid #2e7d32;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="home-button">Home</a>
+        <h1>Calculator to Find 5-Year High and LTP of NSE Stocks</h1>
+        <form method="POST">
+            <label for="stock_symbol">Stock Symbol (e.g., TCS):</label>
+            <input type="text" id="stock_symbol" name="stock_symbol" placeholder="Enter stock symbol" required>
+            <button type="submit">Get 5-Year High, LTP, and Date</button>
+        </form>
+        {% if stock_symbol and five_year_high and high_date %}
+            <div class="stock-info">
+                <h2>5-Year High for {{ stock_symbol }}</h2>
+                <p>₹{{ five_year_high }} on {{ high_date }}</p>
+            </div>
+        {% endif %}
+        {% if stock_symbol and ltp %}
+            <div class="stock-info">
+                <h2>LTP for {{ stock_symbol }}</h2>
+                <p>₹{{ ltp }}</p>
+            </div>
+        {% endif %}
+        {% if error_message %}
+            <div class="error-message">
+                <p>{{ error_message }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
